@@ -1,0 +1,8 @@
+"./GPIO_evmAM572x_board.obj"
+"./Server.obj"
+"./app.obj"
+"./ipcMain.obj"
+"./main.obj"
+-l"configPkg/linker.cmd"
+-lti.board.ae66
+-llibc.a
