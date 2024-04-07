@@ -83,9 +83,9 @@ void appTasksCreate(void)
     //appPrint("\n ======== Starting to create application tasks ========\n");
 
     /* Create task to toggle led */
-    //biosTaskCreate(gpio_toggle_led_task,
-    //               "gpio_toggle_led_task",
-    //               9, 4096);
+    biosTaskCreate(gpio_toggle_led_task,
+                   "gpio_toggle_led_task",
+                   9, 4096);
 
     /* Create task to exercise uart */
     //biosTaskCreate(uart_task,
@@ -115,6 +115,31 @@ void appTasksCreate(void)
  *  @retval            none
  */
 
+void gpio_toggle_led_task(UArg arg0, UArg arg1)
+{
+    while(1) {
+        /* Write High to test GPIO connected to LED */
+        GPIO_write(TEST_LED_GPIO_INDEX, GPIO_PIN_VAL_HIGH);
+
+        /* Delay to set period of pulse */
+        Task_sleep(LED_BLINK_DELAY_VALUE);
+
+        /* Write Low to test GPIO connected to LED */
+        GPIO_write(TEST_LED_GPIO_INDEX, GPIO_PIN_VAL_LOW);
+
+        /* Delay to set period of pulse */
+        /* Note: If the Clock for the platform is incorrectly
+           configured, this may loop here p forever */
+        Task_sleep(LED_BLINK_DELAY_VALUE);
+
+        /* If end Test is triggered, then exit
+         * Note:  The end test can be triggered through commands through uart
+         */
+        if (g_endTestTriggered)
+            break;
+    };
+    Task_exit();
+}
 /**
  *  @brief Function biosTaskCreate : Task create function
  *             This function is customized to control
