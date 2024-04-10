@@ -85,7 +85,7 @@ extern void GPIOApp_UpdateBoardInfo(void);
  ************************** Application parameters ********************
  **********************************************************************/
 /* LED Blink Delay value */
-#define LED_BLINK_DELAY_VALUE       (1000)
+#define MESSAGE_DELAY_VALUE       (1000)
 /* Decide LED GPIO index : Refer to GPIO_PinConfig structure to see
  * which LED is assigned to the respective GPIO index */
 #define TEST_LED_GPIO_INDEX GPIO_USER_LED1
