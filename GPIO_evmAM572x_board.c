@@ -44,10 +44,10 @@
 
 /* Port and pin number mask for Green LED.
    Bits 7-0: Pin number  and Bits 15-8: Port number */
-#define LED1	(0x0708)
-#define LED2	(0x0709)
-#define LED3	(0x070E)
-#define LED4	(0x070F)
+#define LED1    (0x0708)
+#define LED2    (0x0709)
+#define LED3    (0x070E)
+#define LED4    (0x070F)
 
 /* GPIO Driver board specific pin configuration structure */
 GPIO_PinConfig gpioPinConfigs[] = {

@@ -48,7 +48,12 @@
 #include <xdc/cfg/global.h>
 #include <xdc/runtime/System.h>
 #include <xdc/runtime/Error.h>
+#include <ti/drv/gpio/GPIO.h>
+#include <ti/drv/gpio/soc/GPIO_soc.h>
+#include <xdc/runtime/Diags.h>
+#include <xdc/runtime/Log.h>
 
+#include <ti/board/board.h>
 /* Local template app header file */
 #include "app.h"
 
@@ -64,6 +69,8 @@ void uart_task(UArg arg0, UArg arg1);
 void spi_test_task(UArg arg0, UArg arg1);
 void i2c_eeprom_read_and_display_task(UArg arg0, UArg arg1);
 /* Add any additional task function prototypes here */
+
+
 
 /**********************************************************************
  ************************** Global Variables **************************
@@ -117,15 +124,19 @@ void appTasksCreate(void)
 
 void gpio_toggle_led_task(UArg arg0, UArg arg1)
 {
+    GPIO_init();
     while(1) {
         /* Write High to test GPIO connected to LED */
-        GPIO_write(TEST_LED_GPIO_INDEX, GPIO_PIN_VAL_HIGH);
+        //GPIO_write(TEST_LED_GPIO_INDEX, GPIO_PIN_VAL_HIGH);//this is issue
+        //GPIO_write(GPIO_USER_LED0, GPIO_PIN_VAL_HIGH);//this is issue
 
+        Log_print0(Diags_ENTRY, "--> test:");
         /* Delay to set period of pulse */
         Task_sleep(LED_BLINK_DELAY_VALUE);
 
         /* Write Low to test GPIO connected to LED */
-        GPIO_write(TEST_LED_GPIO_INDEX, GPIO_PIN_VAL_LOW);
+        //GPIO_write(TEST_LED_GPIO_INDEX, GPIO_PIN_VAL_LOW);
+        //GPIO_write(GPIO_USER_LED0, GPIO_PIN_VAL_LOW);//this is issue
 
         /* Delay to set period of pulse */
         /* Note: If the Clock for the platform is incorrectly
